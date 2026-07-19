@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-ssr
+.vite
+.DS_Store
+*.log
+.env
+.env.local
+.pnpm-store
+360_f_531641007_g3amsd9djbkthtjged7e7jznz4zbhjfp_1
