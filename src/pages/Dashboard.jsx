@@ -2,13 +2,12 @@ import StatCard from '../components/dashboard/StatCard.jsx';
 import AlarmChart from '../components/dashboard/AlarmChart.jsx';
 import SensorTable from '../components/dashboard/SensorTable.jsx';
 import SerialConnectButton from '../components/dashboard/SerialConnectButton.jsx';
-import useSerialPort from '../js/useSerialPort.js';
-import { pushReading } from '../js/sensorStore.js';
+import { useSerial } from '../components/dashboard/DashboardLayout.jsx';
 // Los StatCard y AlarmChart siguen con mock; las lecturas de sensores vienen del ESP8266.
 import { alarmasActivas, nodosOnline, nodosOffline, sensoresActivos } from '../data/mockData.js';
 
 export default function Dashboard() {
-  const serial = useSerialPort({ onReading: pushReading });
+  const serial = useSerial();
 
   return (
     <div className="dashboard-main">
