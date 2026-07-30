@@ -189,3 +189,534 @@ section {
 .modal__submit:hover {
   opacity: 0.92;
 }
+
+
+/* ===== DASHBOARD ===== */
+:root {
+  --eco-green: #02542D;
+  --eco-black: #000000;
+  --eco-gray-bg: #D9D9D9;
+  --eco-gray-light: #F5F5F5;
+  --eco-white: #FFFFFF;
+  --eco-text: #111111;
+  --eco-text-secondary: #666666;
+  --eco-border: #E5E5E5;
+  --eco-danger: #DC2626;
+  --eco-warning: #F59E0B;
+  --eco-success: #10B981;
+  --eco-info: #3B82F6;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--eco-gray-bg);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.dashboard__body {
+  display: flex;
+  flex: 1;
+}
+
+.dashboard__content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* ===== HEADER DASHBOARD ===== */
+.header-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: var(--eco-white);
+  border-bottom: 1px solid var(--eco-border);
+  height: 64px;
+}
+
+.header-dashboard__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--eco-text);
+  font-size: 0.875rem;
+  transition: color 0.15s ease;
+}
+
+.header-dashboard__back:hover {
+  color: var(--eco-green);
+}
+
+.header-dashboard__back svg {
+  width: 20px;
+  height: 20px;
+}
+
+.header-dashboard__user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-dashboard__avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--eco-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-dashboard__avatar svg {
+  width: 24px;
+  height: 24px;
+}
+
+.header-dashboard__name {
+  font-weight: 500;
+  color: var(--eco-text);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 240px;
+  background-color: var(--eco-green);
+  color: var(--eco-white);
+  padding: 1.5rem 0;
+  flex-shrink: 0;
+}
+
+.sidebar__logo {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1rem;
+}
+
+.sidebar__logo h2 {
+  font-family: "Germania One";
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+}
+
+.sidebar__link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--eco-white);
+}
+
+.sidebar__link--active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--eco-white);
+  font-weight: 500;
+}
+
+.sidebar__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ===== STAT CARDS ===== */
+.dashboard-main__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: var(--eco-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.stat-card__title {
+  font-size: 0.875rem;
+  color: var(--eco-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-card--danger .stat-card__icon {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: var(--eco-danger);
+}
+
+.stat-card--success .stat-card__icon {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--eco-success);
+}
+
+.stat-card--dark .stat-card__icon {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--eco-black);
+}
+
+.stat-card--primary .stat-card__icon {
+  background-color: rgba(2, 84, 45, 0.1);
+  color: var(--eco-green);
+}
+
+.stat-card__body {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.stat-card__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--eco-text);
+  font-family: "Germania One";
+}
+
+.stat-card__trend {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.stat-card__trend--up {
+  color: var(--eco-danger);
+}
+
+.stat-card__trend--down {
+  color: var(--eco-success);
+}
+
+/* ===== ALARM CHART ===== */
+.alarm-chart {
+  background-color: var(--eco-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.alarm-chart__title {
+  font-family: "Germania One";
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--eco-text);
+  margin-bottom: 1rem;
+}
+
+.alarm-chart__container {
+  width: 100%;
+}
+
+/* ===== SENSOR TABLE ===== */
+.sensor-table {
+  background-color: var(--eco-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sensor-table__title {
+  font-family: "Germania One";
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--eco-text);
+  margin-bottom: 1rem;
+}
+
+.sensor-table__container {
+  overflow-x: auto;
+}
+
+.sensor-table__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sensor-table__table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--eco-text-secondary);
+  border-bottom: 1px solid var(--eco-border);
+}
+
+.sensor-table__table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--eco-border);
+  font-size: 0.875rem;
+}
+
+.sensor-table__row:last-child td {
+  border-bottom: none;
+}
+
+.sensor-table__row:hover {
+  background-color: var(--eco-gray-light);
+}
+
+.sensor-table__nodo {
+  font-weight: 500;
+  color: var(--eco-text);
+}
+
+.sensor-table__badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.sensor-table__badge--selva {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--eco-success);
+}
+
+.sensor-table__badge--río {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--eco-info);
+}
+
+.sensor-table__lectura {
+  color: var(--eco-text-secondary);
+}
+
+.sensor-table__separator {
+  margin: 0 0.5rem;
+  color: var(--eco-border);
+}
+
+.sensor-table__status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.sensor-table__status--normal {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--eco-success);
+}
+
+.sensor-table__status--alerta {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: var(--eco-danger);
+}
+
+.sensor-table__empty {
+  text-align: center;
+  color: var(--eco-text-secondary);
+  font-style: italic;
+  padding: 2rem 1rem !important;
+}
+
+/* ===== CONEXIÓN SERIAL ===== */
+.dashboard-main__serial {
+  margin-bottom: 1.5rem;
+}
+
+.serial-connect {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.serial-connect__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  border: 1px solid var(--eco-border);
+  border-radius: 100px;
+  background-color: var(--eco-white);
+  color: var(--eco-text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.serial-connect__btn:hover:not(:disabled) {
+  border-color: var(--eco-green);
+}
+
+.serial-connect__btn:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.serial-connect__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--eco-text-secondary);
+  flex-shrink: 0;
+}
+
+.serial-connect__btn--requesting .serial-connect__dot {
+  background-color: var(--eco-info);
+}
+
+.serial-connect__btn--waiting {
+  border-color: var(--eco-info);
+  color: var(--eco-info);
+}
+
+.serial-connect__btn--waiting .serial-connect__dot {
+  background-color: var(--eco-info);
+}
+
+.serial-connect__btn--live {
+  border-color: var(--eco-success);
+  background-color: rgba(16, 185, 129, 0.08);
+  color: var(--eco-green);
+}
+
+.serial-connect__btn--live .serial-connect__dot {
+  background-color: var(--eco-success);
+  animation: serial-pulse 1.6s ease-in-out infinite;
+}
+
+.serial-connect__btn--stale {
+  border-color: var(--eco-danger);
+  background-color: rgba(220, 38, 38, 0.08);
+  color: var(--eco-danger);
+}
+
+.serial-connect__btn--stale .serial-connect__dot {
+  background-color: var(--eco-danger);
+}
+
+@keyframes serial-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.serial-connect__hint,
+.serial-connect__unsupported {
+  font-size: 0.8rem;
+  color: var(--eco-text-secondary);
+}
+
+.serial-connect__error {
+  font-size: 0.8rem;
+  color: var(--eco-danger);
+}
+
+/* REPONSIVE */
+@media (max-width: 768px) {
+  section {
+      padding: 1rem;
+      height: auto;
+      min-height: 80vh;
+  }
+  .container {
+      clip-path: none;
+      border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  .contenidoIzquierda{
+      top: 1.5rem;
+      left: 1.5rem;
+  }
+
+  /* Dashboard responsive */
+  .dashboard__body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .sidebar__logo {
+    display: none;
+  }
+
+  .sidebar__nav {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .sidebar__link {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .sidebar__link span {
+    display: none;
+  }
+
+  .dashboard__content {
+    padding: 1rem;
+  }
+
+  .dashboard-main__stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card__value {
+    font-size: 1.5rem;
+  }
+}

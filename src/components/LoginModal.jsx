@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function LoginModal() {
+  const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
     const dialog = e.currentTarget.closest('.modal');
     if (dialog) {
       window.prettyModal?.close('modal-login', { currentTarget: dialog });
     }
+    navigate('/dashboard');
   };
 
   const onCloseClick = (e) => {

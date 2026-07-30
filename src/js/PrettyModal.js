@@ -13,32 +13,31 @@ export class Prettymodal {
 
     const origin = event.currentTarget;
     const randomId = Math.random().toString(16).slice(2);
-
     dialog.dataset.flipId = randomId;
     origin.dataset.flipId = randomId;
 
-    // radio de origen, leído ANTES de tocar nada
     const originRadius = getComputedStyle(origin).borderRadius;
-
     const originState = Flip.getState(origin);
 
-    gsap.set(dialog, { clearProps: "all" });
-    gsap.set(dialog, { visibility: "hidden", opacity: 1 });
+    gsap.set(dialog, { visibility: "hidden" });
     dialog.showModal();
 
-    // el radio final ya lo define la clase CSS del dialog (0, 16px, full...)
     const targetRadius = getComputedStyle(dialog).borderRadius;
 
-    dialog.addEventListener("cancel", (e) => {
-      e.preventDefault();
-      this.close(dialogID, true);
-    }, { once: true });
+    dialog.addEventListener(
+      "cancel",
+      (e) => {
+        e.preventDefault();
+        this.close(dialogID, true);
+      },
+      { once: true }
+    );
 
     const tl = gsap.timeline({
       onStart: () => {
         dialog.style.willChange = "width, height, top, left, border-radius, transform";
         gsap.set(dialog, { visibility: "visible" });
-        gsap.to(origin, { opacity: 0, duration: 0.2 });
+        gsap.to(origin, { opacity: 0, duration: 0.1, ease: "power2.in" }, 0);
       },
       onComplete: () => {
         dialog.style.willChange = "auto";
@@ -46,17 +45,16 @@ export class Prettymodal {
       },
     });
 
-    // 1) posición y tamaño con Flip (sin scale:true para permitir squash & stretch)
     tl.add(
       Flip.from(originState, {
         targets: dialog,
-        duration: 0.7,
-        ease: "power3.inOut",
+        duration: 0.5,
+        ease: "power2.inOut",
+        simple: true,
       }),
       0,
     );
 
-    // 2) el radio anima aparte, con SU PROPIO ease -> efecto de gota
     tl.fromTo(
       dialog,
       { borderRadius: originRadius },
@@ -64,7 +62,6 @@ export class Prettymodal {
       0,
     );
 
-    // 3) squash & stretch: anticipación + rebote elástico
     tl.fromTo(
       dialog,
       { scaleX: 1, scaleY: 1 },
@@ -84,7 +81,7 @@ export class Prettymodal {
 
     const originId = dialog.dataset.flipId;
     const origin = document.querySelector(
-      `[data-flip-id="${originId}"]:not([open])`,
+      `[data-flip-id="${originId}"]:not([open])`
     );
 
     if (!origin) {
@@ -93,63 +90,70 @@ export class Prettymodal {
       return;
     }
 
-    // radio de destino (el del origen), leído antes de animar
     const targetRadius = getComputedStyle(origin).borderRadius;
     const originState = Flip.getState(origin);
 
-    // fade out content first, like the HTML demo
-    gsap.to(dialog.children, { opacity: 0, duration: 0.18, ease: "power1.in" });
+    const originBg = getComputedStyle(origin).backgroundColor;
 
-    // fade dialog itself so the block disappears quickly during travel
-    /* gsap.to(dialog, {
+    gsap.to(dialog.children, {
       opacity: 0,
-      duration: 0.2,
-      ease: "power2.in",
-      delay: 0.05,
-    });
-    */
-    // fade border, shadow and bg to match origin button
-    gsap.to(dialog, {
-      boxShadow: "0px 0px 0px 0px rgba(0,0,0,0)",
-      borderWidth: "0px",
-      backgroundColor: getComputedStyle(origin).backgroundColor,
-      duration: 0.15,
-      ease: "power2.out",
-      delay: 0.05,
+      duration: 0.12,
+      ease: "power1.in",
     });
 
     const tl = gsap.timeline({
-      delay: 0.05,
-      defaults: { duration: 0.3, ease: "power4.inOut" },
+      defaults: { ease: "power4.inOut" },
       onStart: () => {
-        dialog.style.willChange = "width, height, top, left, border-radius, transform";
+        dialog.style.willChange = "width, height, top, left, border-radius, transform, background-color, box-shadow";
       },
       onComplete: () => {
         dialog.close();
         dialog.setAttribute("style", "");
         gsap.set(dialog.children, { opacity: 1 });
-        gsap.set(dialog, { opacity: 1 });
+        gsap.set(dialog, { opacity: 1, clearProps: "transform" });
       },
     });
 
-    // 1) posición y tamaño con Flip
     tl.add(
       Flip.to(originState, {
         targets: dialog,
-        duration: 0.3,
-        ease: "power4.inOut",
+        duration: 0.5,
+        ease: "power4.in",
       }),
-      0,
+      0
     );
 
-    // 2) el radio se anima CON DELAY
     tl.to(
       dialog,
-      { borderRadius: targetRadius, duration: 0.2, ease: "power2.out" },
-      0.15,
+      {
+        boxShadow: "0px 0px 0px 0px rgba(0,0,0,0)",
+        borderWidth: "0px",
+        duration: 0.2,
+        ease: "power2.in",
+      },
+      0
     );
 
-    // 3) el texto del botón reaparece justo cuando la caja aterriza
-    tl.to(origin, { opacity: 1, duration: 0.1 }, 0.25);
+    tl.to(
+      dialog,
+      {
+        backgroundColor: originBg,
+        duration: 0.08,
+        ease: "power2.in",
+      },
+      0.22
+    );
+
+    tl.to(
+      dialog,
+      {
+        borderRadius: targetRadius,
+        duration: 0.1,
+        ease: "power2.in",
+      },
+      0.2
+    );
+
+    tl.to(origin, { opacity: 1, duration: 0.01 }, 0.25);
   }
 }
