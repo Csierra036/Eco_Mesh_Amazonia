@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 const MAX_READINGS = 50;
 const EMPTY_READINGS = [];
 // Un nodo se considera online si envió lectura hace menos de este umbral.
-export const ONLINE_THRESHOLD_MS = 30_000;
+export const ONLINE_THRESHOLD_MS = 10_000;
 
 let state = {
   byNode: {},   // { [node]: { readings: [...máx 50], last, updatedAt } }

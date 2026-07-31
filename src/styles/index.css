@@ -851,6 +851,218 @@ section {
   padding-top: 0.75rem;
 }
 
+/* ===== VISTA SENSORES ===== */
+.sensores {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sensores__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sensores__title {
+  font-family: "Germania One";
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--eco-text);
+  margin: 0;
+}
+
+.sensores__subtitle {
+  color: var(--eco-text-secondary);
+  font-size: 0.875rem;
+  max-width: 620px;
+  margin: 0;
+}
+
+.sensores__empty {
+  background-color: var(--eco-white);
+  border-radius: 12px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  color: var(--eco-text-secondary);
+}
+
+.sensores__empty p {
+  margin: 0;
+}
+
+.sensores__empty-hint {
+  margin-top: 0.5rem !important;
+  font-size: 0.85rem;
+}
+
+.sensor-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sensor-row {
+  background-color: var(--eco-white);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid var(--eco-border);
+  overflow: hidden;
+  transition: box-shadow 0.15s ease, border-left-color 0.15s ease;
+}
+
+.sensor-row--online {
+  border-left-color: var(--eco-success);
+}
+
+.sensor-row--offline {
+  border-left-color: var(--eco-text-secondary);
+}
+
+.sensor-row--offline .sensor-row__toggle {
+  opacity: 0.82;
+}
+
+.sensor-row--open {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sensor-row__toggle {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--eco-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.sensor-row__toggle:hover {
+  background-color: var(--eco-gray-light);
+}
+
+.sensor-row__status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--eco-text-secondary);
+  flex-shrink: 0;
+}
+
+.sensor-row--online .sensor-row__status-dot {
+  background-color: var(--eco-success);
+  animation: serial-pulse 1.6s ease-in-out infinite;
+}
+
+.sensor-row__name {
+  font-weight: 600;
+  color: var(--eco-text);
+}
+
+.sensor-row__readings {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.sensor-row__metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.15;
+}
+
+.sensor-row__metric-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--eco-text-secondary);
+}
+
+.sensor-row__metric-value {
+  font-family: "Germania One";
+  font-size: 1rem;
+  color: var(--eco-text);
+}
+
+.sensor-row__status-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--eco-text-secondary);
+  font-weight: 500;
+}
+
+.sensor-row--online .sensor-row__status-label {
+  color: var(--eco-success);
+}
+
+.sensor-row__chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--eco-text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.sensor-row--open .sensor-row__chevron {
+  transform: rotate(180deg);
+}
+
+.sensor-row__panel {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--eco-border);
+  animation: sensor-row-expand 0.18s ease-out;
+}
+
+@keyframes sensor-row-expand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sensor-row__empty {
+  padding: 1.5rem 0 0.5rem;
+  text-align: center;
+  color: var(--eco-text-secondary);
+  font-style: italic;
+  margin: 0;
+}
+
+.sensor-row__charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding-top: 1rem;
+}
+
+.sensor-row__chart-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--eco-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem;
+}
+
+.sensor-row__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 1px dashed var(--eco-border);
+  font-size: 0.75rem;
+  color: var(--eco-text-secondary);
+}
+
 /* ===== COMING SOON ===== */
 .coming-soon {
   display: flex;
@@ -986,5 +1198,24 @@ section {
   .nodos__header {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .sensor-row__toggle {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "dot name chevron"
+      "readings readings readings"
+      "status status status";
+    gap: 0.5rem 1rem;
+  }
+
+  .sensor-row__status-dot { grid-area: dot; }
+  .sensor-row__name { grid-area: name; }
+  .sensor-row__readings { grid-area: readings; justify-content: space-between; }
+  .sensor-row__status-label { grid-area: status; justify-self: start; }
+  .sensor-row__chevron { grid-area: chevron; }
+
+  .sensor-row__charts {
+    grid-template-columns: 1fr;
   }
 }
